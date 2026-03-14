@@ -14,3 +14,5 @@ const ThemeToggle = () => {
     </Wrapper>
   );
 };
+
+export default ThemeToggle;
