@@ -8,6 +8,9 @@ const app = express();
 import jobRouter from "./routes/jobRoutes.js";
 import mongoose from "mongoose";
 
+//middleware
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+
 let jobs = [
   { id: nanoid(), company: "apple", position: "front-end" },
   { id: nanoid(), company: "google", position: "back-end" },
@@ -34,10 +37,7 @@ app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
 });
 
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ msg: "something went wrong" });
-});
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5100;
 
