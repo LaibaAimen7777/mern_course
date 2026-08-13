@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 const app = express();
 import jobRouter from "./routes/jobRoutes.js";
 import mongoose from "mongoose";
-import { validateCreate } from "./middleware/validationMiddleware.js";
+// import { validateCreate } from "./middleware/validationMiddleware.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
