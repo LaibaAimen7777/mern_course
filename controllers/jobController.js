@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import Job from "../models/JobModel.js";
 import { StatusCodes } from "http-status-codes";
-import { NotFoundError } from "../errors/customErrors.js";
 
 let jobs = [
   { id: nanoid(), company: "apple", position: "front-end" },
@@ -14,11 +13,7 @@ export const getAllJobs = async (req, res) => {
 };
 
 export const getJob = async (req, res) => {
-  const { id } = req.params;
-  const job = await Job.findById(id);
-  if (!job) {
-    throw new NotFoundError(`no job with id : ${id}`);
-  }
+  const job = await Job.findById(req.params.id);
   res.status(StatusCodes.OK).json({ job });
 };
 
@@ -29,17 +24,15 @@ export const createJob = async (req, res) => {
 };
 
 export const updateJob = async (req, res) => {
-  const { id } = req.params;
-  const updatedJob = await Job.findByIdAndUpdate(id, req.body, { new: true });
-  if (!updatedJob) throw new NotFoundError(`no job with id : ${id}`);
+  const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
   res.status(StatusCodes.OK).json({ msg: "job modified", job: updatedJob });
 };
 
 export const deleteJob = async (req, res) => {
-  const { id } = req.params;
-  const deletedJob = await Job.findByIdAndDelete(id);
-  if (!deletedJob) throw new NotFoundError(`no job with id : ${id}`);
+  const deletedJob = await Job.findByIdAndDelete(req.params.id);
 
   res.status(StatusCodes.OK).json({ msg: "job deleted", job: deletedJob });
 };
