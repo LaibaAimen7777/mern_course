@@ -12,10 +12,10 @@ import mongoose from "mongoose";
 //middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 
-let jobs = [
-  { id: nanoid(), company: "apple", position: "front-end" },
-  { id: nanoid(), company: "google", position: "back-end" },
-];
+// let jobs = [
+//   { id: nanoid(), company: "apple", position: "front-end" },
+//   { id: nanoid(), company: "google", position: "back-end" },
+// ];
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
