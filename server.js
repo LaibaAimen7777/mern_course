@@ -6,16 +6,12 @@ import morgan from "morgan";
 import { nanoid } from "nanoid";
 const app = express();
 import jobRouter from "./routes/jobRoutes.js";
+import authRouter from "./routes/authRouter.js";
 import mongoose from "mongoose";
 // import { validateCreate } from "./middleware/validationMiddleware.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
-
-// let jobs = [
-//   { id: nanoid(), company: "apple", position: "front-end" },
-//   { id: nanoid(), company: "google", position: "back-end" },
-// ];
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -33,6 +29,7 @@ app.post("/", (req, res) => {
 app.use(express.json());
 
 app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
