@@ -45,3 +45,11 @@ export const validateIdParam = withValidationErrors([
     }
   }),
 ]);
+
+export const validateUser = withValidationErrors([
+  body("name").notEmpty().withMessage("Name is required"),
+  body("email").notEmpty().withMessage("Email is required"),
+  body("password").notEmpty().withMessage("Email is required"),
+  body("lastName").notEmpty().withMessage("Email is required"),
+  body("location").notEmpty().withMessage("Email is required"),
+]);
