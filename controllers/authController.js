@@ -1,13 +1,13 @@
 import User from "../models/UserModel";
 import { StatusCodes } from "http-status-codes";
-import bcrypt from "bcryptjs/dist/bcrypt";
+import { hashPassword } from "../utils/passwordUtils";
 
 export const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
   req.body.role = isFirstAccount ? "admin" : "user";
   const user = await User.create(req.body);
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+  const hashedPassword = await hashPassword(req.body.password);
   req.body.password = hashedPassword;
   res.status(StatusCodes.CREATED).json({ msg: "User created " });
 };
