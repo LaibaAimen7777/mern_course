@@ -11,4 +11,7 @@ export const register = async (req, res) => {
   req.body.password = hashedPassword;
   res.status(StatusCodes.CREATED).json({ msg: "User created " });
 };
-export const login = async (req, res) => {};
+
+export const login = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+};
