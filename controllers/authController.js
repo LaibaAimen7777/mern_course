@@ -26,5 +26,10 @@ export const login = async (req, res) => {
 
   const token = createJWT({ userId: user._id, role: user.role });
 
-  res.send({ token });
+  res.cookie("token", token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + oneDay),
+  });
+
+  res.status(StatusCodes.CREATED).json({ msg: "user logged in" });
 };
