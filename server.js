@@ -12,6 +12,7 @@ import mongoose from "mongoose";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+import { authencateUser } from "./middleware/authMiddleware.js";
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -36,6 +37,7 @@ app.use("*", (req, res) => {
 });
 
 app.use(errorHandlerMiddleware);
+api.use("/api/v1/jobs", authencateUser, jobRouter);
 
 const port = process.env.PORT || 5100;
 
