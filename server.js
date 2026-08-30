@@ -3,16 +3,18 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import morgan from "morgan";
+import mongoose from "mongoose";
 import { nanoid } from "nanoid";
 const app = express();
+
 import jobRouter from "./routes/jobRoutes.js";
 import authRouter from "./routes/authRouter.js";
-import mongoose from "mongoose";
-// import { validateCreate } from "./middleware/validationMiddleware.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
-import { authencateUser } from "./middleware/authMiddleware.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
+
+import cookieParser from "cookie-parser";
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -37,7 +39,8 @@ app.use("*", (req, res) => {
 });
 
 app.use(errorHandlerMiddleware);
-api.use("/api/v1/jobs", authencateUser, jobRouter);
+api.use("/api/v1/jobs", authenticateUser, jobRouter);
+app.use(cookieParser());
 
 const port = process.env.PORT || 5100;
 
