@@ -15,6 +15,9 @@ const withValidationErrors = (validateValues) => {
         if (errorMessages[0].startsWith("no job")) {
           throw new NotFoundError(errorMessages);
         }
+        if (errorMessages[0].startsWith("not authorized")) {
+          throw new UnauthorizedError("not authorized to access this route");
+        }
         throw new BadRequestError(errorMessages);
       }
       next();
