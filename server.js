@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 const app = express();
 
 import jobRouter from "./routes/jobRoutes.js";
+import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/authRouter.js";
 
 //middleware
@@ -31,9 +32,10 @@ app.post("/", (req, res) => {
 
 app.use(express.json());
 
-app.use("/api/v1/jobs", jobRouter);
+// app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/auth", authRouter);
-api.use("/api/v1/jobs", authenticateUser, jobRouter);
+app.use("/api/v1/users", authenticateUser, userRouter);
+app.use("/api/v1/jobs", authenticateUser, jobRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });
