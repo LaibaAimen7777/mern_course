@@ -8,6 +8,8 @@ export const getCurrentUser = async (req, res) => {
 };
 
 export const getApplicationStats = async (req, res) => {
+  const users = await User.countDDocuments();
+
   res.status(StatusCodes.OK).json({ msg: "application stats" });
 };
 
