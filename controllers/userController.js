@@ -18,3 +18,5 @@ export const updateUser = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(req.user.userid, req.body);
   res.status(StatusCodes.OK).json({ msg: "user updated" });
 };
+
+export default authorizationPermissions = (...roles) => {};
