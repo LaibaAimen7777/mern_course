@@ -19,4 +19,11 @@ export const updateUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "user updated" });
 };
 
-export default authorizationPermissions = (...roles) => {};
+export default authorizationPermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new UnauthorizedError("Unauthorized to access this route");
+    }
+    next();
+  };
+};
