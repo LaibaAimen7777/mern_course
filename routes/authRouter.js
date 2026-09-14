@@ -10,4 +10,9 @@ router.post("./register", validateRegisterInput, register);
 router.post("./login", validateLoginInput, login);
 router.get("./logout", logout);
 
+router.get("/admin/app-stats", [
+  authorizePermissions("admin"),
+  getApplicationStats,
+]);
+
 export default router;
