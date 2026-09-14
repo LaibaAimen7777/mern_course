@@ -56,3 +56,7 @@ try {
   console.log(error);
   process.exit(1);
 }
+
+app.get("/api/v1/test", (req, res) => {
+  res.json({ msg: "test route" });
+});
