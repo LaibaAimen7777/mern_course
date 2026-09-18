@@ -7,7 +7,9 @@ fetch("http://localhost:5100/api/v1/test")
   .then((res) => res.json())
   .then((data) => console.log(data));
 
-fetch("/api/v1/test").then((res) => res.json());
+fetch("/api/v1/test").then((res) =>
+  res.json().then((data) => console.log(data)),
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
