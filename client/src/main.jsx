@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import axios from "axios";
+import customerFetch from "./utils/customerFetch.js";
 
 const data = await axios.get("/api/v1/test");
 console.log(data);
