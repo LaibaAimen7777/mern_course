@@ -8,6 +8,9 @@ import customerFetch from "./utils/customerFetch.js";
 const data = await axios.get("/api/v1/test");
 console.log(data);
 
+const data = await customFetch.get("/test");
+console.log(data);
+
 fetch("http://localhost:5100/api/v1/test")
   .then((res) => res.json())
   .then((data) => console.log(data));
